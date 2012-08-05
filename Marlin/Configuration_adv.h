@@ -86,7 +86,10 @@
 
 #define AXIS_RELATIVE_MODES {false, false, false, false}
 
-#define MAX_STEP_FREQUENCY 40000 // Max step frequency for Ultimaker (5000 pps / half step)
+/* #define MAX_STEP_FREQUENCY 40000 // Max step frequency for Ultimaker (5000 pps / half step) */
+#define MAX_STEP_FREQUENCY 500000 // StepStick's A4988 Datasheet sais 2 microseconds min
+// between each step, no idea if the motors can follow that
+
 
 //By default pololu step drivers require an active high signal. However, some high power drivers require an active low signal as step.
 #define INVERT_X_STEP_PIN false
@@ -95,7 +98,7 @@
 #define INVERT_E_STEP_PIN false
 
 //default stepper release if idle
-#define DEFAULT_STEPPER_DEACTIVE_TIME 60
+#define DEFAULT_STEPPER_DEACTIVE_TIME 15
 
 #define DEFAULT_MINIMUMFEEDRATE       0.0     // minimum feedrate
 #define DEFAULT_MINTRAVELFEEDRATE     0.0

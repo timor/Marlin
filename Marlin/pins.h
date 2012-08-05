@@ -73,8 +73,8 @@
 #endif
 
 //x axis pins
-#define X_STEP_PIN 19
-#define X_DIR_PIN 18
+#define X_STEP_PIN 18 //hardware bug
+#define X_DIR_PIN 19 //hardware bug
 #define X_ENABLE_PIN 24
 #define X_MIN_PIN 7
 #define X_MAX_PIN -1
@@ -106,19 +106,27 @@
 #define HEATER_0_PIN 4
 #define HEATER_1_PIN -1
 #define HEATER_2_PIN -1
+#ifdef FAN_ON_HEATBED
+#define HEATER_BED_PIN -1
+#else
 #define HEATER_BED_PIN 3
-
+#endif
 
 #define SDPOWER -1
 #define SDSS -1 // SCL pin of I2C header
 #define LED_PIN -1
 
-#if (GEN7_VERSION >= 13)
+#if (GEN7_VERSION >= 13) && !defined(FAN_ON_HEATBED)
 // Gen7 v1.3 removed the fan pin
 #define FAN_PIN -1
 #else
-#define FAN_PIN 31
+ #ifdef FAN_ON_HEATBED
+ #define FAN_PIN 3
+ #else
+ #define FAN_PIN 31
+ #endif
 #endif
+
 #define PS_ON_PIN 15
 
 #if (GEN7_VERSION < 14)

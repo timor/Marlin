@@ -39,15 +39,15 @@
 #For Arduino Mega2560
 #MCU = atmega2560
 #For Sanguinololu
-MCU = atmega644p 
+MCU = atmega644 
 
 # Here you select "arduino", "Sanguino", "Gen7", ...
-HARDWARE_VARIANT 		= Sanguino
+HARDWARE_VARIANT 		= Gen7
 # This defined the board you are compiling for
-HARDWARE_MOTHERBOARD	= 91
+HARDWARE_MOTHERBOARD	= 12
 
 # Arduino source install directory
-INSTALL_DIR = ../../arduino-0022
+INSTALL_DIR = ../../arduino-1.0.1
 
 # Arduino containd the main source code for the Arduino
 # Libraries, the "hardware variant" are for boards
@@ -58,15 +58,15 @@ ARDUINO = $(INSTALL_DIR)/hardware/arduino/cores/arduino
 ifeq (${HARDWARE_VARIANT}, arduino)
 HARDWARE_SRC= $(ARDUINO)
 else
-HARDWARE_SRC= $(HARDWARE_VARIANT)/cores/arduino
+HARDWARE_SRC= $(INSTALL_DIR)/hardware/$(HARDWARE_VARIANT)/cores/arduino
 endif
 
 # Be sure to regenerate speed_lookuptable.h with create_speed_lookuptable.py
 # if you are setting this to something other than 16MHz
-F_CPU = 16000000
+F_CPU = 20000000
 
 UPLOAD_RATE = 115200
-AVRDUDE_PROGRAMMER = arduino
+AVRDUDE_PROGRAMMER = stk500v2
 PORT = /dev/arduino
 
 TARGET = $(notdir $(CURDIR))
@@ -84,7 +84,7 @@ VPATH += $(INSTALL_DIR)/libraries/LiquidCrystal
 ############################################################################
 # Below here nothing should be changed...
 
-AVR_TOOLS_PATH = 
+AVR_TOOLS_PATH = $(INSTALL_DIR)/hardware/tools/avr/bin/
 SRC =  pins_arduino.c wiring.c \
 	wiring_analog.c wiring_digital.c \
 	wiring_pulse.c \
