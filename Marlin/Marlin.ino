@@ -688,11 +688,9 @@ void process_commands()
       }
       #endif
       
-      if((home_all_axis) || (code_seen(axis_codes[X_AXIS]))) 
-      {
-        HOMEAXIS(X);
-      }
 
+      //reordered to first home Y, then Z then X to prevent running into
+      // obstacle with extruder motor while homing
       if((home_all_axis) || (code_seen(axis_codes[Y_AXIS]))) {
         HOMEAXIS(Y);
       }
@@ -703,6 +701,12 @@ void process_commands()
       }
       #endif
       
+      if((home_all_axis) || (code_seen(axis_codes[X_AXIS]))) 
+      {
+        HOMEAXIS(X);
+      }
+
+  
       if(code_seen(axis_codes[X_AXIS])) 
       {
         if(code_value_long() != 0) {
@@ -1068,6 +1072,9 @@ void process_commands()
 
     #if FAN_PIN > -1
       case 106: //M106 Fan On
+        #ifdef FAN_ON_HEATBED
+         //SERIAL_PROTOCOLPGM("ok using heatbed for fan!")
+        #endif
         if (code_seen('S')){
            FanSpeed=constrain(code_value(),0,255);
         }
