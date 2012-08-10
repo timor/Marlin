@@ -101,7 +101,11 @@
 #define TEMP_0_PIN 1
 #define TEMP_1_PIN -1
 #define TEMP_2_PIN -1
+#ifdef FAN_ON_HEATBED
+#define TEMP_BED_PIN -1
+#else
 #define TEMP_BED_PIN 2
+#endif
 
 #define HEATER_0_PIN 4
 #define HEATER_1_PIN -1
