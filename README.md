@@ -1,3 +1,18 @@
+FORK INFORMATION
+================== 
+This Fork contains customizations
+for the Turmlabor PrusaMendel and Gen7 electronics (including bugfixes
+for hardware errors).  Use with Arduino 1.0.1
+
+Usage reminder: 
+* download/install arduino 1.0.1
+* copy Gen7 directory to arduino-install-dir/hardware/
+* adjust Makefile for toolchain if needed
+* adjust Configuration.h and Configuration_adv.h
+* start arduino and load Marlin.ino
+* select correct hardware (Gen7 20MHz)
+* compile/upload, shorting the reset jumper when avrdude starts
+
 WARNING: 
 --------
 THIS IS RELEASE CANDIDATE 2 FOR MARLIN 1.0.0
