@@ -46,12 +46,14 @@
     #define BLOCK {blocking[BL_MI]=millis()+blocktime;blocking[BL_ST]=millis()+blocktime;}
     
   #endif
+
+
     
   // blocking time for recognizing a new keypress of one key, ms
   #define blocktime 500
   #define lcdslow 5
     
-  enum MainStatus{Main_Status, Main_Menu, Main_Prepare,Sub_PrepareMove, Main_Control, Main_SD,Sub_TempControl,Sub_MotionControl,Sub_RetractControl};
+  enum MainStatus{Main_Status, Main_Menu, Main_Prepare,Sub_PrepareMove, Main_Control, Main_SD,Sub_TempControl,Sub_MotionControl,Sub_RetractControl, Sub_PreheatPLASettings, Sub_PreheatABSSettings};
 
   class MainMenu{
   public:
@@ -71,6 +73,8 @@
     void showControlRetract();
     void showAxisMove();
     void showSD();
+	void showPLAsettings();
+	void showABSsettings();
     bool force_lcd_update;
     long lastencoderpos;
     int8_t lineoffset;
@@ -140,12 +144,14 @@
   #define LCD_INIT lcd_init();
   #define LCD_MESSAGE(x) lcd_status(x);
   #define LCD_MESSAGEPGM(x) lcd_statuspgm(MYPGM(x));
+  #define LCD_ALERTMESSAGEPGM(x) lcd_alertstatuspgm(MYPGM(x));
   #define LCD_STATUS lcd_status()
 #else //no lcd
   #define LCD_INIT
   #define LCD_STATUS
   #define LCD_MESSAGE(x)
   #define LCD_MESSAGEPGM(x)
+  #define LCD_ALERTMESSAGEPGM(x)
   FORCE_INLINE void lcd_status() {};
 
   #define CLICKED false
@@ -153,6 +159,7 @@
 #endif 
   
 void lcd_statuspgm(const char* message);
+void lcd_alertstatuspgm(const char* message);
   
 char *ftostr3(const float &x);
 char *itostr2(const uint8_t &x);
